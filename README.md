@@ -114,6 +114,8 @@ Le projet contient un workflow GitHub Actions `.github/workflows/ci-test.yml` qu
 ✔️ Lance les migrations & fixtures
 ✔️ Exécute les tests
 
+Pour exécuter les tests avec la CI, il est impératif d'avoir mis dans les github secrets du repository la variable `WEATHER_API_KEY` qui contient la clef API de WeatherAPI.
+
 ## 📁 Arborescence utile
 
 ```
