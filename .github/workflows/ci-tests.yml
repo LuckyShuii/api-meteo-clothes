@@ -14,7 +14,7 @@ jobs:
             APP_ENV: test
             # Set the database URL to use SQLite for testing
             DATABASE_URL: "sqlite:///${{ github.workspace }}/var/test.db"
-            WEATHER_API_KEY: "fake-api-key-for-tests"
+            WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
 
         steps:
             - name: Checkout code
