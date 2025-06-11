@@ -1,4 +1,4 @@
-# 🧪 Test Technique — Recommandation de vêtements selon la météo
+# Test Technique — Recommandation de vêtements selon la météo
 
 Ce projet a été réalisé dans le cadre d’un **test technique** visant à construire une API de recommandation de vêtements, en fonction de la météo d'une ville donnée.
 
@@ -6,9 +6,9 @@ L'objectif était de permettre à une équipe marketing de cibler les produits �
 
 ---
 
-## 🚀 Ce que j’ai développé
+## Ce que j'ai développé
 
-✔️ Une API Symfony propre, découpée et testée, qui expose :
+✔️ Une API Symfony propre, découpée et testée, qui expose les routes:
 
 -   `/clothe/{city}` : retourne une liste de vêtements selon la température dans une ville
 -   `?date=today|tomorrow` : permet de demander la météo du jour ou du lendemain
@@ -76,7 +76,7 @@ Avec Symfony CLI :
 symfony server:start
 ```
 
-## 🧪 Exemple d’appel API
+## Exemple d’appel API
 
 ```http
 GET /clothe/Paris
@@ -99,13 +99,13 @@ GET /clothe/Marseille?date=tomorrow
 }
 ```
 
-## ✅ Lancer les tests
+## Lancer les tests
 
 ```
 php bin/phpunit
 ```
 
-## ⚙️ CI intégrée
+## CI intégrée
 
 Le projet contient un workflow GitHub Actions `.github/workflows/ci-test.yml` qui :
 
