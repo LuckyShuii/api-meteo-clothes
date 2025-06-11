@@ -51,4 +51,41 @@ class ClotheControllerTest extends WebTestCase
         $data = json_decode($client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('error', $data);
     }
+
+    /**
+     * Test that the /clothe endpoint with ?date=tomorrow returns a successful response
+     */
+    public function testClotheEndpointWithTomorrowDate()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/clothe/paris?date=tomorrow');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseFormatSame('json');
+
+        $data = json_decode($client->getResponse()->getContent(), true);
+
+        // Vérifie que la clé "weather"."date" vaut "tomorrow"
+        $this->assertEquals('tomorrow', $data['weather']['date']);
+
+        // On s'assure quand même que le reste de la structure est OK
+        $this->assertArrayHasKey('products', $data);
+        $this->assertArrayHasKey('weather', $data);
+        $this->assertArrayHasKey('city', $data['weather']);
+        $this->assertArrayHasKey('is', $data['weather']);
+    }
+
+    /**
+     * Test that the /clothe endpoint fails with a 400 Bad Request response when an invalid date is provided.
+     */
+    public function testClotheEndpointFailsOnInvalidDate()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/clothe/paris?date=unknownDate');
+
+        $this->assertResponseStatusCodeSame(400);
+
+        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('error', $data);
+    }
 }
