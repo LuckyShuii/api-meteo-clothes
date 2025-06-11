@@ -12,8 +12,8 @@ jobs:
 
         env:
             APP_ENV: test
-            # Set the database URL to use an in-memory SQLite database for testing
-            DATABASE_URL: "sqlite:///:memory:"
+            # Set the database URL to use SQLite for testing
+            DATABASE_URL: "sqlite:///${{ github.workspace }}/var/test.db"
             WEATHER_API_KEY: "fake-api-key-for-tests"
 
         steps:
@@ -29,6 +29,14 @@ jobs:
 
             - name: Install Composer dependencies
               run: composer install --prefer-dist --no-progress --no-interaction
+
+            - name: Prepare SQLite test database
+              run: |
+                  mkdir -p var
+                  rm -f var/test.db
+
+            - name: Ensure SQLite file exists
+              run: touch var/test.db
 
             - name: Create database schema from mappings
               run: php bin/console doctrine:schema:create --env=test
