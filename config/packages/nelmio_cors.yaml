@@ -1,0 +1,9 @@
+nelmio_cors:
+    defaults:
+        allow_origin: ["http://localhost:8000"]
+        # API is readonly so we only allow GET requests
+        allow_methods: ["GET"]
+        allow_headers: ["Content-Type"]
+        max_age: 3600
+    paths:
+        "^/": ~
