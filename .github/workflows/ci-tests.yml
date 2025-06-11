@@ -36,8 +36,14 @@ jobs:
             - name: Install Composer dependencies
               run: composer install
 
+            - name: Drop test database if exists
+              run: php bin/console doctrine:database:drop --env=test --force --if-exists
+
             - name: Create test database
               run: php bin/console doctrine:database:create --env=test
+
+            - name: Run migrations
+              run: php bin/console doctrine:migrations:migrate --env=test --no-interaction
 
             - name: Load fixtures
               run: php bin/console doctrine:fixtures:load --env=test --no-interaction
